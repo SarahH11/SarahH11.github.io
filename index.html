@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BioEmbed Systems Lab Dr Sarah Hussain</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --text: #1a1a18;
+    --muted: #6b6b60;
+    --accent: #1a3a2a;
+    --accent-light: #e8f0eb;
+    --border: #e2ddd6;
+    --sans: 'DM Sans', sans-serif;
+    --serif: 'DM Serif Display', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cv {
+    background: var(--accent);
+    color: #fff !important;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    transition: opacity 0.2s !important;
+  }
+
+  .nav-cv:hover { opacity: 0.85; color: #fff !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-inner { max-width: 720px; }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    border-radius: 2rem;
+  }
+
+  .hero-tag.gold {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-name {
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero p {
+    font-size: 1.125rem;
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.85rem 1.75rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .hero-cta:hover { opacity: 0.85; }
+
+  .hero-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.85rem 1.75rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--accent);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .hero-cta-secondary:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-intro {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 620px;
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+  }
+
+  /* RESEARCH GRID */
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .research-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .research-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .research-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--accent-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .research-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .research-card h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .research-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ABOUT */
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.85;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-text .cv-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    transition: opacity 0.2s;
+  }
+
+  .about-text .cv-download:hover { opacity: 0.85; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* RECOGNITION BANNER */
+  .recognition {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+  }
+
+  .recognition-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .recognition-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .recognition-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--text);
+  }
+
+  .recognition-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  /* PUBLICATIONS */
+  .pub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .pub-item {
+    background: var(--surface);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .pub-item:last-child { border-bottom: none; }
+  .pub-item:hover { background: var(--accent-light); }
+
+  .pub-title {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+  }
+
+  .pub-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .pub-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .pub-tag.review { background: #fef3c7; color: #92400e; }
+  .pub-tag.submitted { background: #ede9fe; color: #5b21b6; }
+
+  /* GRANTS */
+  .grants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .grant-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .grant-amount {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+
+  .grant-title {
+    font-size: 0.875rem;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+  }
+
+  .grant-funder {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* CONTACT */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-info p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-detail svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* FORM */
+  .contact-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+  }
+
+  .form-group { margin-bottom: 1.25rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--text);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--accent); }
+
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { opacity: 0.85; }
+
+  .form-note {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  footer span { color: var(--accent); font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .about-inner,
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .nav-links { display: none; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">BioEmbed Systems Lab</a>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="Sarah_Hussain_CV.pdf" class="nav-cv" target="_blank">CV ↓</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badges">
+      <span class="hero-tag">London, United Kingdom</span>
+      <span class="hero-tag gold">★ STEM for Britain 2026 Finalist</span>
+      <span class="hero-tag">FHEA</span>
+    </div>
+    <h1>Embedding biology<br>into <em>intelligent</em><br>systems</h1>
+    <p class="hero-name">Dr Sarah Hussain · PhD, FHEA · Queen Mary University of London</p>
+    <p>BioEmbed Systems Lab is an independent research laboratory advancing biosensing, myoelectric control, tactile sensing, and neuromorphic computing for assistive and rehabilitation technologies.</p>
+    <div class="hero-actions">
+      <a href="#research" class="hero-cta">Explore research →</a>
+      <a href="Sarah_Hussain_CV.pdf" class="hero-cta-secondary" target="_blank">Download CV ↓</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label">What we do</div>
+  <h2 class="section-title">Research areas</h2>
+  <p class="section-intro">Our work sits at the intersection of biological signals, embedded intelligence, and human-centred engineering building systems that sense, learn, and respond in real time.</p>
+
+  <div class="research-grid">
+
+    <div class="research-card">
+      <div class="research-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+      </div>
+      <h3>Myoelectric prosthetic control</h3>
+      <p>Decoding surface EMG and HD-sEMG signals to enable intuitive, dexterous control of upper-limb prostheses using pattern recognition and deep learning approaches including transformer architectures.</p>
+    </div>
+
+    <div class="research-card">
+      <div class="research-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </div>
+      <h3>Sensory stimulation & feedback</h3>
+      <p>Designing closed-loop electrotactile and vibrotactile feedback systems that restore the sense of touch in prosthetic users, improving embodiment and functional performance.</p>
+    </div>
+
+    <div class="research-card">
+      <div class="research-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h3>Spiking neural networks</h3>
+      <p>Applying neuromorphic and spiking neural network architectures to biosignal processing enabling energy-efficient, real-time decoding that mirrors the brain's own temporal coding.</p>
+    </div>
+
+    <div class="research-card">
+      <div class="research-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Tactile sensing & e-skin</h3>
+      <p>Developing flexible electronic skin platforms with multimodal sensing capabilities pressure, texture, and temperature for prosthetics, robotics, and wearable health monitoring.</p>
+    </div>
+
+    <div class="research-card">
+      <div class="research-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>Rehabilitation engineering</h3>
+      <p>Creating intelligent, adaptive rehabilitation systems that respond to user physiology combining gamification, real-time biofeedback, and machine learning to improve outcomes.</p>
+    </div>
+
+    <div class="research-card">
+      <div class="research-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 3H3v7h18V3zM3 14h6v7H3v-7zM13 14h8v7h-8v-7z"/></svg>
+      </div>
+      <h3>Multi-omics & clinical AI</h3>
+      <p>Integrating genomic, proteomic, and metabolomic data with clinical AI frameworks applying machine learning to multi-modal biological datasets for digital health and disease understanding.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <div class="section-label">About the lab</div>
+      <h2 class="section-title">Independent. Rigorous. Human-centred.</h2>
+      <p>BioEmbed Systems Lab is led by <strong>Dr Sarah Hussain</strong>, a biomedical engineer and researcher based in London, UK. The lab conducts fundamental and applied research at the boundary of biomedical engineering, neural signal processing, and assistive technology.</p>
+      <p>Our work is grounded in a foundation of anatomy and physiology a reminder that behind every dataset, signal, and model is a human body. We embed biological principles into the design of intelligent systems for people.</p>
+      <p>We collaborate with academic institutions, clinical partners, and industry to translate research into real-world impact for people living with limb difference, motor impairments, and chronic conditions.</p>
+      <a href="Sarah_Hussain_CV.pdf" class="cv-download" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
+      </a>
+
+      <div class="recognition">
+        <div class="recognition-label">Recognition & Awards</div>
+        <div class="recognition-items">
+          <div class="recognition-item"><div class="recognition-dot"></div><span>STEM for Britain 2026 Finalist Houses of Parliament</span></div>
+          <div class="recognition-item"><div class="recognition-dot"></div><span>SEMS PhD Research Excellence Award Best Presentation Prize (1st Prize)</span></div>
+          <div class="recognition-item"><div class="recognition-dot"></div><span>Francis Crick Innovation Challenge Award Healthy Ageing</span></div>
+          <div class="recognition-item"><div class="recognition-dot"></div><span>Fellowship of the Higher Education Academy (FHEA)</span></div>
+          <div class="recognition-item"><div class="recognition-dot"></div><span>UK Commonwealth Scholarship</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Research focus areas</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">£51k+</div>
+          <div class="stat-label">Research funding secured</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">13+</div>
+          <div class="stat-label">Students supervised</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">2025</div>
+          <div class="stat-label">Established</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <div class="section-label" style="margin-bottom: 1rem;">Funding & Grants</div>
+        <div class="grants-grid" style="margin-top: 0;">
+          <div class="grant-card">
+            <div class="grant-amount">£25,761</div>
+            <div class="grant-title">EPSRC Exploratory Grant SOFTSocket</div>
+            <div class="grant-funder">EPSRC · 2025</div>
+          </div>
+          <div class="grant-card">
+            <div class="grant-amount">£12,000</div>
+            <div class="grant-title">Royal Society International Exchange Grant</div>
+            <div class="grant-funder">Royal Society · 2025</div>
+          </div>
+          <div class="grant-card">
+            <div class="grant-amount">£12,000</div>
+            <div class="grant-title">EPSRC Impact Acceleration Better the Bone</div>
+            <div class="grant-funder">EPSRC · 2023</div>
+          </div>
+          <div class="grant-card">
+            <div class="grant-amount">£2,000</div>
+            <div class="grant-title">Centre for Public Engagement Grants</div>
+            <div class="grant-funder">QMUL · 2025–2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-label">Research output</div>
+  <h2 class="section-title">Publications</h2>
+  <p class="section-intro">Selected publications from the lab and affiliated researchers.</p>
+
+  <div class="pub-list">
+
+
+
+
+
+    <div class="pub-item">
+      <div class="pub-title">Towards Real-Time Prosthetic Control Using Multi-Domain Time-Frequency EMG Classification and ResNet Transfer Learning</div>
+      <div class="pub-meta">Khuwaja, S.H., Dhillon, B., Mughal, M.M., Hussain, S. and Shaheed, M.H. · IEEE MetroXRAINE 2025 (pp. 889–894)</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">KneeFlex: A Soft Wearable Knee Joint Tele-Rehabilitation Robot</div>
+      <div class="pub-meta">Zhang, T., Zhou, L. and Khuwaja, S.H. · IEEE MetroXRAINE 2025 (pp. 776–781)</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Design and Integration of a 15-DOF Myoelectric Prosthetic Hand with Tendon-Driven Actuation and Force Feedback Control</div>
+      <div class="pub-meta">Usman, S., Shaheed, H. and Hussain, S. · CLAWAR 2025 (pp. 73–85). Springer Nature Switzerland</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Monitoring Carbon Dioxide Levels in Exhaled Breath for Biomedical Applications</div>
+      <div class="pub-meta">Batool, R. et al. including Hussain, S. · KEYTECH 2024 (p. 92). Springer Nature</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in touch</div>
+  <h2 class="section-title">Contact</h2>
+
+  <div class="contact-inner">
+    <div class="contact-info">
+      <p>We welcome enquiries from prospective collaborators, researchers, clinicians, and industry partners interested in our work.</p>
+      <p>Whether you are interested in research collaboration, licensing our technology, or simply learning more about what we do we would love to hear from you.</p>
+      <div class="contact-detail">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        London, United Kingdom
+      </div>
+      <div class="contact-detail">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        bioembedlab.co.uk
+      </div>
+      <div class="contact-detail">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://linkedin.com/in/sarahhusssain" style="color: var(--muted); text-decoration: none;">linkedin.com/in/sarahhusssain</a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <form action="https://formspree.io/f/mjglbrqp" method="POST">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" name="name" placeholder="Dr Jane Smith" required>
+        </div>
+        <div class="form-group">
+          <label>Your email</label>
+          <input type="email" name="email" placeholder="jane@university.ac.uk" required>
+        </div>
+        <div class="form-group">
+          <label>Enquiry type</label>
+          <select name="type">
+            <option value="">Select one</option>
+            <option value="collaboration">Research collaboration</option>
+            <option value="licensing">Technology licensing</option>
+            <option value="media">Media enquiry</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea name="message" placeholder="Tell us about your enquiry..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send message</button>
+        <p class="form-note">We aim to respond within 5 working days.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>BioEmbed Systems Lab</span> · Dr Sarah Hussain · London, UK · bioembedlab.co.uk</p>
+</footer>
+
+</body>
+</html>
